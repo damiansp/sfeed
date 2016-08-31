@@ -1,42 +1,7 @@
-//-----------------------------------------------------------
-//-----------------------------------------------------------
-//
-//             System: IQFeed
-//       Program Name: Generic Socket Class
-//        Module Name: IQFeed_Socket.java
-//
-//-----------------------------------------------------------
-//
-//            Proprietary Software Product
-//
-//           Data Transmission Network Inc.
-//           9110 West Dodge Road Suite 200
-//               Omaha, Nebraska  68114
-//
-//    Copyright (c) by Data Transmission Network 2010
-//                 All Rights Reserved
-//
-//
-//-----------------------------------------------------------
-// Module Description: Generic Socket Class w/Buffered Reader and Writer
-//         References: None
-//           Compiler: Netbeans 7.4, Java 1.7045
-//             Author: Tim Walter
-//        Modified By: Damian Satterthwaite-Phillips
-//
-//-----------------------------------------------------------
-//-----------------------------------------------------------
-//-----------------------------------------------------------
+/* IQFeed_Socket.java */
+
 // Website for Level1 information:
 //   http://www.iqfeed.net/dev/api/docs/Level1viaTCPIP.cfm
-//-----------------------------------------------------------
-/******************************************************************************
- * DISCLAIMER:  These apps are designed with simplicity in mind and are not 
- * designed for copy and paste development.  You will need to consider 
- * performance enhancements based upon your own needs and implement your
- * solution accordingly. They are a guide to get people started, nothing more.
- *****************************************************************************/
-
 import java.io.*;
 import java.net.*;
 
