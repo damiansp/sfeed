@@ -1,9 +1,16 @@
 /* Level1Socket.java */
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class Level1Socket {
   private int IQFEED_LEVEL1_PORT_DEFAULT = 5009; // adjustable in registry
   IQFeed_Socket C_Level1IQFeed_Socket;
+  private LinkedList stocks = new LinkedList<String>();
+  private BufferedReader input;
+  private String line;
+    
 
   // Constr
   /**
@@ -56,10 +63,57 @@ public class Level1Socket {
     }
   }
 
+  // Read the stocks to be tracked from a file.  File should be formatted as
+  // "STOCK1"\n
+  // "STOCK2"\n
+  // ...
+  public void readStockFile(String filePath) {
+    // Create input stream and open file
+    try {
+      input = new BufferedReader(new FileReader(filePath));
+    } catch (IOException ioEx) {
+      System.err.println("Error opening file");
+      ioEx.printStackTrace();
+    }
+
+    try {
+      while ((line = input.readLine()) != null) {
+        stocks.add(line);
+      }
+    } catch (IOException ioEx) {
+      System.err.printf("Error reading next line of file %s\n", filePath);
+      ioEx.printStackTrace();
+    } finally {
+      try {
+        input.close();
+      } catch (IOException ioEx) {
+        System.err.printf("Error closing file %s\n", filePath);
+        ioEx.printStackTrace();
+      }
+    }
+
+
+  }
+
   // Begin tracking a stock
   public void watchStock(String stock) {
     String sCommand = "w" + stock + "\r\n";
     sendMessage(sCommand);
+  }
+
+  // Watch all stocks
+  public void watchAllStocks(int maxStocks) {
+    int nStocks = 0;
+    String nextStock;
+
+    nextStock = (String) stocks.pop();
+    
+    while (nextStock != null && nStocks <= maxStocks) {
+      // First "stock" read is ^VIX; ignore.
+      nextStock = (String) stocks.pop();
+      watchStock(nextStock);
+      nStocks++;
+    }
   }
 
 
