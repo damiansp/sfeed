@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 
 public class Level1Socket {
   private int IQFEED_LEVEL1_PORT_DEFAULT = 5009; // adjustable in registry
@@ -107,12 +108,17 @@ public class Level1Socket {
     String nextStock;
 
     nextStock = (String) stocks.pop();
-    
+
     while (nextStock != null && nStocks <= maxStocks) {
       // First "stock" read is ^VIX; ignore.
-      nextStock = (String) stocks.pop();
-      watchStock(nextStock);
-      nStocks++;
+      try {
+        nextStock = (String) stocks.pop();
+        watchStock(nextStock);
+        nStocks++;
+      } catch (NoSuchElementException nseEx) {
+        nseEx.printStackTrace();
+        break;
+      }
     }
   }
 
