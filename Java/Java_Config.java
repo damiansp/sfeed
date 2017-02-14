@@ -4,6 +4,6 @@ public class Java_Config {
 
   Java_Config() {
     most_recent_protocol = "5.2";
-    product_id =  "EIMAR_BOESJES_12104";
+    product_id =  "YOUR_PRODUCT_ID";
   }
 }
